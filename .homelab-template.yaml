@@ -1,0 +1,25 @@
+_commit: v1.6.5-4-g43b6c66
+_src_path: /home/crthomas/code/charlesthomas/homelab-template
+additionalResources: certificates.yaml
+backups: false
+helm: true
+helmCrds: false
+helmName: nginx-ingress
+helmRelease: nginx-internal
+helmRepo: https://helm.nginx.com/stable
+helmValues: helm/values.yaml
+helmVersion: 1.0.2
+ingSecret: ''
+ingress: false
+labels: |-
+  app.kubernetes.io/instance: internal
+  app.kubernetes.io/name: nginx-ingress
+name: nginx-internal
+namespace: nginx-internal
+pvc: false
+reloader: false
+resources: []
+service: false
+serviceAccount: false
+upstreamURL: https://nginx.org/en/
+url: https://github.com/charlesthomas/homelab-nginx-internal

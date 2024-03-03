@@ -1,0 +1,21 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: nginx-internal
+
+commonAnnotations:
+  repo: https://github.com/charlesthomas/homelab-nginx-internal
+commonLabels:
+  app.kubernetes.io/instance: internal
+  app.kubernetes.io/name: nginx-ingress
+
+resources:
+- resources/certificates.yaml
+- resources/namespaces.yaml
+helmCharts:
+- name: nginx-ingress
+  namespace: nginx-internal
+  releaseName: nginx-internal
+  repo: https://helm.nginx.com/stable
+  valuesFile: helm/values.yaml
+  version: 1.0.2

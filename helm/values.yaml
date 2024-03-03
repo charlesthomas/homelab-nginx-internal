@@ -11,10 +11,10 @@ controller:
     # tag: "3.3.2"
 
   defaultTLS:
-    secret: "nginx-external/crt.house"
+    secret: "nginx-internal/crt.house"
 
   wildcardTLS:
-    secret: "nginx-external/crt.house"
+    secret: "nginx-internal/crt.house"
 
   replicaCount: 2
 

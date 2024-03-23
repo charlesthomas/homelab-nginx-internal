@@ -12,6 +12,23 @@ commonLabels:
 resources:
 - resources/certificates.yaml
 - resources/namespaces.yaml
+patches:
+- patch: |-
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: nginx-internal
+      namespace: nginx-internal
+      annotations:
+        gethomepage.dev/href: https://nginx-internal.crt.house
+        gethomepage.dev/enabled: "true"
+        gethomepage.dev/description: 
+        gethomepage.dev/group: 
+        gethomepage.dev/icon: nginx-internal
+        gethomepage.dev/name: nginx-internal
+        gethomepage.dev/pod-selector: ""
+  target:
+    kind: Ingress
 helmCharts:
 - name: nginx-ingress
   namespace: nginx-internal

@@ -1,8 +1,182 @@
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: internal-ingress-nginx-admission
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/instance: nginx-internal
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/component: admission-webhook
+rules:
+  - apiGroups:
+      - admissionregistration.k8s.io
+    resources:
+      - validatingwebhookconfigurations
+    verbs:
+      - get
+      - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: internal-ingress-nginx-admission
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/instance: nginx-internal
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/component: admission-webhook
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: internal-ingress-nginx-admission
+subjects:
+  - kind: ServiceAccount
+    name: ingress-nginx-admission
+    namespace: nginx-internal
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: internal-ingress-nginx-admission
+  namespace: nginx-internal
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/instance: nginx-internal
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/component: admission-webhook
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+    verbs:
+      - get
+      - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: internal-ingress-nginx-admission
+  namespace: nginx-internal
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/instance: nginx-internal
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/component: admission-webhook
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: internal-ingress-nginx-admission
+subjects:
+  - kind: ServiceAccount
+    name: ingress-nginx-admission
+    namespace: nginx-internal
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/instance: nginx-internal
+    app.kubernetes.io/part-of: ingress-nginx
+  name: internal-ingress-nginx
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+      - endpoints
+      - nodes
+      - pods
+      - secrets
+      - namespaces
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - nodes
+    verbs:
+      - get
+  - apiGroups:
+      - ""
+    resources:
+      - services
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - ""
+    resources:
+      - events
+    verbs:
+      - create
+      - patch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses/status
+    verbs:
+      - update
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingressclasses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - discovery.k8s.io
+    resources:
+      - endpointslices
+    verbs:
+      - list
+      - watch
+      - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/instance: nginx-internal
+    app.kubernetes.io/part-of: ingress-nginx
+  name: internal-ingress-nginx
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: ingress-nginx
+subjects:
+  - kind: ServiceAccount
+    name: ingress-nginx
+    namespace: nginx-internal
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/instance: nginx-internal
+    app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/component: controller
   name: ingress-nginx
   namespace: nginx-internal
@@ -90,6 +264,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/instance: nginx-internal
+    app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/component: controller
   name: ingress-nginx
   namespace: nginx-internal

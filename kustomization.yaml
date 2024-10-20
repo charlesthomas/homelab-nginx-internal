@@ -11,11 +11,11 @@ commonLabels:
 
 resources:
 - resources/certificates.yaml
+- resources/configmaps.yaml
+- resources/deployments.yaml
+- resources/horizontal-pod-autoscalers.yaml
+- resources/ingress-classes.yaml
 - resources/namespaces.yaml
-helmCharts:
-- name: nginx-ingress
-  namespace: nginx-internal
-  releaseName: nginx-internal
-  repo: https://helm.nginx.com/stable
-  valuesFile: helm/values.yaml
-  version: 1.0.2
+- resources/rbac.yaml
+- resources/service-accounts.yaml
+- resources/services.yaml

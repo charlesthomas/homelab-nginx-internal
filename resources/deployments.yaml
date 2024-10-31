@@ -33,7 +33,7 @@ spec:
             - --default-ssl-certificate=nginx-internal/crt.house
             - --publish-service=$(POD_NAMESPACE)/ingress-nginx-controller
             - --election-id=ingress-nginx-leader
-            - --controller-class=k8s.io/ingress-nginx
+            - --controller-class=k8s.io/ingress-nginx-internal
             - --ingress-class=nginx-internal
             - --configmap=$(POD_NAMESPACE)/ingress-nginx-controller
             - --enable-metrics=false

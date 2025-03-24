@@ -91,9 +91,6 @@ spec:
               containerPort: 8443
               protocol: TCP
           resources:
-            requests:
-              cpu: 100m
-              memory: 90Mi
             limits:
               cpu: 250m
               memory: 250Mi

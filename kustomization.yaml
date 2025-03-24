@@ -13,7 +13,6 @@ resources:
 - resources/certificates.yaml
 - resources/configmaps.yaml
 - resources/deployments.yaml
-- resources/horizontal-pod-autoscalers.yaml
 - resources/ingress-classes.yaml
 - resources/namespaces.yaml
 - resources/rbac.yaml

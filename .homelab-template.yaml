@@ -1,6 +1,6 @@
 _commit: v1.12.1-6-gbf0c0a5
 _src_path: /Users/crthomas/code/charlesthomas/homelab-template
-additionalResources: certificates.yaml,horizontal-pod-autoscalers.yaml,ingress-classes.yaml
+additionalResources: certificates.yaml,ingress-classes.yaml
 backups: false
 helm: false
 homepageEnabled: false

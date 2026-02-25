@@ -15,7 +15,6 @@ reloader: false
 resources:
   - configmaps.yaml
   - deployments.yaml
-  - namespaces.yaml
   - rbac.yaml
   - service-accounts.yaml
   - services.yaml

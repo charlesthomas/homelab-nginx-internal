@@ -5,9 +5,11 @@ namespace: nginx-internal
 
 commonAnnotations:
   repo: https://github.com/charlesthomas/homelab-nginx-internal
-commonLabels:
-  app.kubernetes.io/instance: internal
-  app.kubernetes.io/name: nginx-ingress
+labels:
+- includeSelectors: true
+  pairs:
+    app.kubernetes.io/instance: internal
+    app.kubernetes.io/name: nginx-ingress
 
 resources:
 - resources/certificates.yaml
